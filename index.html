@@ -338,5 +338,254 @@
     © 2026 Nexus Control. All rights reserved.
   </footer>
 
+  <!-- Auth Modal -->
+  <div id="authModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 p-6">
+    <div class="glass rounded-3xl p-8 w-full max-w-md relative">
+      <button onclick="closeAuth()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">×</button>
+
+      <h2 id="authTitle" class="text-3xl font-bold mb-6">Login</h2>
+
+      <div class="space-y-4">
+        <input id="username" type="text" placeholder="Username" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 outline-none hidden">
+
+        <input id="email" type="email" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 outline-none">
+
+        <input id="password" type="password" placeholder="Password" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 outline-none">
+
+        <button onclick="submitAuth()" class="w-full py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 transition font-semibold">
+          Continue
+        </button>
+
+        <button onclick="discordLogin()" class="w-full py-4 rounded-2xl glass hover:bg-white/5 transition">
+          Login With Discord
+        </button>
+
+        <p class="text-center text-gray-400 text-sm">
+          <span id="toggleText">Don't have an account?</span>
+          <button onclick="toggleAuthMode()" class="text-indigo-400 ml-1">
+            Sign Up
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Page -->
+  <section id="dashboardPage" class="hidden min-h-screen relative z-10">
+    <div class="flex">
+
+      <aside class="w-72 min-h-screen glass border-r border-white/10 p-6 hidden md:block">
+        <div class="flex items-center gap-3 mb-10">
+          <div class="w-12 h-12 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-xl">
+            N
+          </div>
+          <div>
+            <h2 class="font-bold text-xl">Nexus Control</h2>
+            <p class="text-gray-400 text-sm">Dashboard</p>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-gray-300">
+          <button onclick="showDashboardSection('overview')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition">Dashboard</button>
+          <button onclick="showDashboardSection('staff')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition">Staff</button>
+          <button onclick="showDashboardSection('applications')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition">Applications</button>
+          <button onclick="showDashboardSection('reports')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition">Reports</button>
+          <button onclick="showDashboardSection('billing')" class="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition">Billing</button>
+        </div>
+      </aside>
+
+      <main class="flex-1 p-8">
+
+        <div class="flex justify-between items-center mb-10">
+          <div>
+            <h1 class="text-4xl font-bold">Dashboard</h1>
+            <p class="text-gray-400">Welcome to Nexus Control</p>
+          </div>
+
+          <button onclick="logout()" class="px-5 py-3 rounded-2xl bg-red-500/20 border border-red-500/20 hover:bg-red-500/30 transition">
+            Logout
+          </button>
+        </div>
+
+        <div id="overviewSection">
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="glass rounded-3xl p-6">
+              <p class="text-gray-400 mb-2">Total Staff</p>
+              <h2 class="text-4xl font-bold">42</h2>
+            </div>
+
+            <div class="glass rounded-3xl p-6">
+              <p class="text-gray-400 mb-2">Open Reports</p>
+              <h2 class="text-4xl font-bold">8</h2>
+            </div>
+
+            <div class="glass rounded-3xl p-6">
+              <p class="text-gray-400 mb-2">Applications</p>
+              <h2 class="text-4xl font-bold">15</h2>
+            </div>
+
+            <div class="glass rounded-3xl p-6">
+              <p class="text-gray-400 mb-2">Hours Logged</p>
+              <h2 class="text-4xl font-bold">164</h2>
+            </div>
+          </div>
+        </div>
+
+        <div id="staffSection" class="hidden glass rounded-3xl p-8">
+          <h2 class="text-3xl font-bold mb-6">Staff Members</h2>
+
+          <div class="space-y-4">
+            <div class="flex justify-between bg-white/5 rounded-2xl p-4">
+              <span>Mason</span>
+              <span class="text-indigo-400">Owner</span>
+            </div>
+
+            <div class="flex justify-between bg-white/5 rounded-2xl p-4">
+              <span>Jamie</span>
+              <span class="text-purple-400">Moderator</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="applicationsSection" class="hidden glass rounded-3xl p-8">
+          <h2 class="text-3xl font-bold mb-6">Applications</h2>
+          <p class="text-gray-400">No pending applications.</p>
+        </div>
+
+        <div id="reportsSection" class="hidden glass rounded-3xl p-8">
+          <h2 class="text-3xl font-bold mb-6">Reports</h2>
+          <p class="text-gray-400">No open reports.</p>
+        </div>
+
+        <div id="billingSection" class="hidden glass rounded-3xl p-8">
+          <h2 class="text-3xl font-bold mb-6">Billing</h2>
+          <p class="text-gray-400 mb-4">Current Plan: Pro</p>
+          <button class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 transition">
+            Manage Subscription
+          </button>
+        </div>
+
+      </main>
+    </div>
+  </section>
+
+  <script>
+    let authMode = 'login';
+
+    function openAuth(mode) {
+      authMode = mode;
+      document.getElementById('authModal').classList.remove('hidden');
+      document.getElementById('authModal').classList.add('flex');
+
+      if (mode === 'signup') {
+        document.getElementById('authTitle').innerText = 'Create Account';
+        document.getElementById('username').classList.remove('hidden');
+        document.getElementById('toggleText').innerText = 'Already have an account?';
+      } else {
+        document.getElementById('authTitle').innerText = 'Login';
+        document.getElementById('username').classList.add('hidden');
+        document.getElementById('toggleText').innerText = "Don't have an account?";
+      }
+    }
+
+    function closeAuth() {
+      document.getElementById('authModal').classList.add('hidden');
+      document.getElementById('authModal').classList.remove('flex');
+    }
+
+    function toggleAuthMode() {
+      if (authMode === 'login') {
+        openAuth('signup');
+      } else {
+        openAuth('login');
+      }
+    }
+
+    async function submitAuth() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const username = document.getElementById('username').value;
+
+      const endpoint = authMode === 'signup'
+        ? 'http://localhost:3000/api/register'
+        : 'http://localhost:3000/api/login';
+
+      const body = authMode === 'signup'
+        ? { username, email, password }
+        : { email, password };
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          showDashboard();
+        } else {
+          alert(data.error || 'Something went wrong');
+        }
+      } catch (err) {
+        alert('Backend server not running');
+      }
+    }
+
+    function discordLogin() {
+      window.location.href = 'http://localhost:3000/auth/discord';
+    }
+
+    function showDashboard() {
+      document.querySelectorAll('section').forEach(section => {
+        section.style.display = 'none';
+      });
+
+      document.querySelector('nav').style.display = 'none';
+
+      document.getElementById('dashboardPage').style.display = 'block';
+      closeAuth();
+    }
+
+    function logout() {
+      localStorage.removeItem('token');
+      location.reload();
+    }
+
+    function showDashboardSection(section) {
+      const sections = [
+        'overview',
+        'staff',
+        'applications',
+        'reports',
+        'billing'
+      ];
+
+      sections.forEach(sec => {
+        document.getElementById(sec + 'Section').classList.add('hidden');
+      });
+
+      document.getElementById(section + 'Section').classList.remove('hidden');
+    }
+
+    document.querySelectorAll('button').forEach(button => {
+      if (button.innerText.includes('Login')) {
+        button.addEventListener('click', () => openAuth('login'));
+      }
+
+      if (button.innerText.includes('Get Started') || button.innerText.includes('Start Free Trial')) {
+        button.addEventListener('click', () => openAuth('signup'));
+      }
+    });
+
+    if (localStorage.getItem('token')) {
+      showDashboard();
+    }
+  </script>
+
 </body>
 </html>
